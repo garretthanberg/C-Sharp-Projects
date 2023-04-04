@@ -12,7 +12,6 @@ namespace Blackjack
         static void Main(string[] args)
         {
             Deck deck = new Deck();
-            
             deck.shuffle(3);
 
             foreach (Card card in deck.Cards)
