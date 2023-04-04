@@ -31,6 +31,9 @@ namespace Class_Method_Practice
             int result2 = divider.multiplyBy2(num);
             Console.WriteLine($"The result of overloading the method to multiply {num} by 2 is {result2}");
 
+            // This calls the static method in the static class.
+            Static_Class.printMessage();
+
             Console.ReadLine();
         }
     }
