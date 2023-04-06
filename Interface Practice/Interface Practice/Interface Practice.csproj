@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{679D598E-C992-4D6F-8ED4-28AA6D517103}</ProjectGuid>
+    <ProjectGuid>{363DAF13-F8E9-44F1-B9AA-92DD9264726E}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Blackjack</RootNamespace>
-    <AssemblyName>Blackjack</AssemblyName>
+    <RootNamespace>Interface_Practice</RootNamespace>
+    <AssemblyName>Interface Practice</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,13 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlackJack Game.cs" />
-    <Compile Include="Card.cs" />
-    <Compile Include="Dealer.cs" />
-    <Compile Include="Deck.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="IWalkAway.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Employee.cs" />
+    <Compile Include="IQuittable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
