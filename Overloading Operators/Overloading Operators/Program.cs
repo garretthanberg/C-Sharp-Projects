@@ -14,9 +14,9 @@ namespace Overloading_Operators
             Employee employee1 = new Employee { Id = 1, FirstName = "John", LastName = "Doe" };
             Employee employee2 = new Employee { Id = 2, FirstName = "Jane", LastName = "Doe" };
 
-            // This compares the two Employee objects using the overloaded operators and display the results.
-            Console.WriteLine($"employee1 == employee2 : {employee1 == employee2}");
-            Console.WriteLine($"employee1 != employee2 : {employee1 != employee2}");
+            // This compares the two Employee ID's using the overloaded operators and displays the results.
+            Console.WriteLine($"Employee 1\'s ID == Employee 2\'s ID : {employee1.Id == employee2.Id}");
+            Console.WriteLine($"Employee 1\'s ID != Employee 2\'s ID : {employee1.Id != employee2.Id}");
 
             Console.ReadKey();
         }
