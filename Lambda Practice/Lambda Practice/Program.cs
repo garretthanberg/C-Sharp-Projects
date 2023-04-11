@@ -25,7 +25,7 @@ namespace Lambda_Practice
                 new Employee { Id = 10, FirstName = "Lisa", LastName = "Jones" }
             };
 
-            //This creates a new list of all employees with the first name "Joe" using a foreach loop.
+            // This creates a new list of all employees with the first name "Joe" using a foreach loop.
             var joes = new List<Employee>();
             foreach (var employee in employees)
             {
