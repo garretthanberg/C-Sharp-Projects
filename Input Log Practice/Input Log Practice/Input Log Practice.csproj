@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{679D598E-C992-4D6F-8ED4-28AA6D517103}</ProjectGuid>
+    <ProjectGuid>{27135D17-3ADD-4E3F-BF8B-EFCA32BF7B4A}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Blackjack</RootNamespace>
-    <AssemblyName>Blackjack</AssemblyName>
+    <RootNamespace>Input_Log_Practice</RootNamespace>
+    <AssemblyName>Input Log Practice</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,15 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlackJack Dealer.cs" />
-    <Compile Include="BlackJack Game.cs" />
-    <Compile Include="BlackJack Rules.cs" />
-    <Compile Include="Card.cs" />
-    <Compile Include="Dealer.cs" />
-    <Compile Include="Deck.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="IWalkAway.cs" />
-    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Blackjack
 {
@@ -11,14 +12,28 @@ namespace Blackjack
     {
         static void Main(string[] args)
         {
-            Deck deck = new Deck();
-            deck.shuffle(3);
+            Console.WriteLine("Welcome to the Grand Hotel and Casino. Let's start by telling me your name.");
+            string playerName = Console.ReadLine();
+            Console.WriteLine("And how much money did you bring today?");
+            int bank = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Hello, {0}. Would you like to join a game of Blackjack right now?", playerName);
+            string answer = Console.ReadLine().ToLower();
 
-            foreach (Card card in deck.Cards)
+            if (answer == "yes" || answer == "yeah" || answer == "y" || answer == "ya")
             {
-                Console.WriteLine(card.Face + " of " + card.Suit);
+                Player player = new Player(playerName, bank);
+                Game game = new BlackJack_Game();
+                game += player;
+                player.IsActivelyPlaying = true;
+                while (player.IsActivelyPlaying && player.Balance > 0)
+                {
+                    game.Play();
+                }
+                game -= player;
+                Console.WriteLine("Thank you for playing!");
             }
-            Console.WriteLine(deck.Cards.Count);
+
+            Console.WriteLine("Feel free to look around the casino. Bye for now.");
             Console.ReadLine();
         }
     }
