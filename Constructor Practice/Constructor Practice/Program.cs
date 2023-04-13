@@ -10,6 +10,11 @@ namespace Constructor_Practice
     {
         static void Main(string[] args)
         {
+            // This creates a const variable.
+            const int myConstVar = 10;
+
+            // This creates a variable using the keyword "var."
+            var myVar = "This is a string.";
         }
     }
 }
