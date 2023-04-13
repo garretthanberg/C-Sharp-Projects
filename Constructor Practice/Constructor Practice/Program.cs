@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blackjack
+namespace Constructor_Practice
 {
-    interface IWalkAway
+    internal class Program
     {
-        void walkAway(Player player);
+        static void Main(string[] args)
+        {
+        }
     }
 }

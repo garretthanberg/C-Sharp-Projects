@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
+using Casino;
+using Casino.Blackjack;
 
 namespace Blackjack
 {
@@ -22,6 +19,11 @@ namespace Blackjack
             if (answer == "yes" || answer == "yeah" || answer == "y" || answer == "ya")
             {
                 Player player = new Player(playerName, bank);
+                player.Id = Guid.NewGuid();
+                using (StreamWriter file = new StreamWriter(@"C:\Users\garretthanberg\source\Logs\log.txt", true))
+                {
+                    file.WriteLine(player.Id);
+                }
                 Game game = new BlackJack_Game();
                 game += player;
                 player.IsActivelyPlaying = true;
@@ -32,7 +34,6 @@ namespace Blackjack
                 game -= player;
                 Console.WriteLine("Thank you for playing!");
             }
-
             Console.WriteLine("Feel free to look around the casino. Bye for now.");
             Console.ReadLine();
         }
