@@ -12,8 +12,6 @@ namespace NewsletterAppMVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Newsletter;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
-
         public ActionResult Index()
         {
             return View();
@@ -40,25 +38,6 @@ namespace NewsletterAppMVC.Controllers
                 }
                 
                 return View("Success");
-            }
-        }
-
-        public ActionResult Admin()
-        {
-            using (NewsletterEntities db = new NewsletterEntities())
-            {
-                var signups = db.SignUps;
-                var signupVms = new List<SignUpVm>();
-                foreach (var signup in signups)
-                {
-                    var signupVm = new SignUpVm();
-                    signupVm.FirstName = signup.FirstName;
-                    signupVm.LastName = signup.LastName;
-                    signupVm.EmailAddress = signup.EmailAddress;
-                    signupVms.Add(signupVm);
-                }
-
-                return View(signups);
             }
         }
     }
