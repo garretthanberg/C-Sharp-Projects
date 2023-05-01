@@ -18,12 +18,6 @@ namespace CarInsurance2._0
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-
-            routes.MapRoute(
-                name: "InsureeAdmin",
-                url: "Insuree/Admin",
-                defaults: new { controller = "Insuree", action = "Admin" }
-            );
         }
     }
 }

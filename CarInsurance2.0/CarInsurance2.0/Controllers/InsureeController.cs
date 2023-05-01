@@ -46,7 +46,7 @@ namespace CarInsurance2._0.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,EmailAddress,DateOfBirth,CarYear,CarMake,CarModel,DUI,SpeedingTickets,CoverageType,Quote")] Insuree insuree)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,EmailAddress,DateOfBirth,CarYear,CarMake,CarModel,DUI,SpeedingTickets,CoverageType")] Insuree insuree)
         {
             if (ModelState.IsValid)
             {
@@ -57,6 +57,7 @@ namespace CarInsurance2._0.Controllers
 
             return View(insuree);
         }
+
 
         // GET: Insuree/Edit/5
         public ActionResult Edit(int? id)
@@ -78,7 +79,7 @@ namespace CarInsurance2._0.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,EmailAddress,DateOfBirth,CarYear,CarMake,CarModel,DUI,SpeedingTickets,CoverageType,Quote")] Insuree insuree)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,EmailAddress,DateOfBirth,CarYear,CarMake,CarModel,DUI,SpeedingTickets,CoverageType")] Insuree insuree)
         {
             if (ModelState.IsValid)
             {
@@ -133,59 +134,61 @@ namespace CarInsurance2._0.Controllers
         // POST: Insuree/Quote
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Quote([Bind(Include = "Id,FirstName,LastName,EmailAddress,DateOfBirth,CarYear,CarMake,CarModel,DUI,SpeedingTickets,CoverageType,Quote")] Insuree insuree)
-        {
-            decimal monthlyTotal = 50;
+        public ActionResult Quote(string firstName, string lastName, string emailAddress, string dateOfBirth, int carYear, string carMake, string carModel, int speedingTickets, bool dui, bool fullCoverage)
+        { 
+            // Start with base price of $50.
+            double quote = 50;
 
-            // Age calculation.
-            int age = DateTime.Now.Year - insuree.DateOfBirth.Year;
-            if (age <= 18)
+            // Add age-based fees.
+            DateTime birthdate = DateTime.Parse(dateOfBirth);
+            TimeSpan age = DateTime.Now - birthdate;
+            int years = age.Days / 365;
+            if (years <= 18)
             {
-                monthlyTotal += 100;
+                quote += 100;
             }
-            else if (age >= 19 && age <= 25)
+            else if (years >= 19 && years <= 25)
             {
-                monthlyTotal += 50;
+                quote += 50;
             }
             else
             {
-                monthlyTotal += 25;
+                quote += 25;
             }
 
-            // Car year calculation.
-            if (insuree.CarYear < 2000 || insuree.CarYear > 2015)
+            // Add car year-based fees.
+            if (carYear < 2000 || carYear > 2015)
             {
-                monthlyTotal += 25;
+                quote += 25;
             }
 
-            // Car make and model calculation.
-            if (insuree.CarMake.ToLower() == "porsche")
+            // Add car make/model-based fees.
+            if (carMake.ToLower() == "porsche")
             {
-                monthlyTotal += 25;
-
-                if (insuree.CarModel.ToLower() == "911 carrera")
+                quote += 25;
+                if (carModel.ToLower() == "911 carrera")
                 {
-                    monthlyTotal += 25;
+                    quote += 25;
                 }
             }
 
-            // Speeding tickets calculation.
-            monthlyTotal += insuree.SpeedingTickets * 10;
+            // Add speeding ticket fees.
+            quote += speedingTickets * 10;
 
-            // DUI calculation.
-            if (insuree.DUI)
+            // Add DUI fee.
+            if (dui)
             {
-                monthlyTotal *= 1.25m;
+                quote *= 1.25;
             }
 
-            // Full coverage calculation.
-            if (insuree.CoverageType)
+            // Add full coverage fee.
+            if (fullCoverage)
             {
-                monthlyTotal *= 1.5m;
+                quote *= 1.5;
             }
 
-            insuree.Quote = monthlyTotal;
-            return View(insuree);
+            ViewBag.Quote = quote;
+            return View();
         }
 
         public ActionResult Admin()
