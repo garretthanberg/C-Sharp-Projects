@@ -50,6 +50,57 @@ namespace CarInsurance2._0.Controllers
         {
             if (ModelState.IsValid)
             {
+                decimal monthlyQuote = 50m;
+
+                // This adds age-based fees.
+                if (insuree.DateOfBirth.Year >= DateTime.Now.Year - 18)
+                {
+                    monthlyQuote += 100m;
+                }
+                else if (insuree.DateOfBirth.Year >= DateTime.Now.Year - 25)
+                {
+                    monthlyQuote += 50m;
+                }
+                else
+                {
+                    monthlyQuote += 25m;
+                }
+
+                // This adds car year fees
+                if (insuree.CarYear < 2000 || insuree.CarYear > 2015)
+                {
+                    monthlyQuote += 25m;
+                }
+
+                // This adds car make and model fees.
+                if (insuree.CarMake.ToLower() == "porsche")
+                {
+                    monthlyQuote += 25m;
+
+                    if (insuree.CarModel.ToLower() == "911 carrera")
+                    {
+                        monthlyQuote += 25m;
+                    }
+                }
+
+                // This speeding ticket fees.
+                monthlyQuote += insuree.SpeedingTickets * 10m;
+
+                // This adds DUI fees.
+                if (insuree.DUI)
+                {
+                    monthlyQuote *= 1.25m;
+                }
+
+                // This adds coverage type fees if full coverage.
+                if (insuree.CoverageType)
+                {
+                    monthlyQuote *= 1.5m;
+                }
+
+                // This sets the calculated monthly quote.
+                insuree.Quote = monthlyQuote;
+
                 db.Insurees.Add(insuree);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -123,72 +174,6 @@ namespace CarInsurance2._0.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        // GET: Insuree/Quote
-        public ActionResult Quote()
-        {
-            return View();
-        }
-
-        // POST: Insuree/Quote
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Quote(string firstName, string lastName, string emailAddress, string dateOfBirth, int carYear, string carMake, string carModel, int speedingTickets, bool dui, bool fullCoverage)
-        { 
-            // Start with base price of $50.
-            double quote = 50;
-
-            // Add age-based fees.
-            DateTime birthdate = DateTime.Parse(dateOfBirth);
-            TimeSpan age = DateTime.Now - birthdate;
-            int years = age.Days / 365;
-            if (years <= 18)
-            {
-                quote += 100;
-            }
-            else if (years >= 19 && years <= 25)
-            {
-                quote += 50;
-            }
-            else
-            {
-                quote += 25;
-            }
-
-            // Add car year-based fees.
-            if (carYear < 2000 || carYear > 2015)
-            {
-                quote += 25;
-            }
-
-            // Add car make/model-based fees.
-            if (carMake.ToLower() == "porsche")
-            {
-                quote += 25;
-                if (carModel.ToLower() == "911 carrera")
-                {
-                    quote += 25;
-                }
-            }
-
-            // Add speeding ticket fees.
-            quote += speedingTickets * 10;
-
-            // Add DUI fee.
-            if (dui)
-            {
-                quote *= 1.25;
-            }
-
-            // Add full coverage fee.
-            if (fullCoverage)
-            {
-                quote *= 1.5;
-            }
-
-            ViewBag.Quote = quote;
-            return View();
         }
 
         public ActionResult Admin()
