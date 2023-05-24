@@ -1,5 +1,5 @@
 # C# Projects
-This repository features a collection of small projects developed using C#, .NET Framework, and .NET Core, showcasing my skills in application development using these technologies.
+This repository features a collection of projects developed using C#, .NET Framework, and .NET Core, showcasing my skills in application development using these technologies.
 
 Black Jack Console Game:
 Enjoy a console-based version of the timeless game of Black Jack with this project implemented using C# and the .NET Framework. This game offers an interactive gaming experience where players can place bets, make strategic decisions, and challenge the dealer in an exciting virtual casino setting. The project demonstrates my ability to create console-based applications using C# and the .NET Framework.
